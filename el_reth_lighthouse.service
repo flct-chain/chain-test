@@ -1,0 +1,35 @@
+[Unit]
+Description=Reth
+
+[Service]
+Type=simple
+User=ubuntu
+Restart=always
+RestartSec=10
+Environment="OPTIONS=--default"
+ExecStart=/home/ubuntu/.cargo/bin/reth node \
+    -vvvv \
+    --full \
+    --datadir=/home/ubuntu/data/reth/execution-data \
+    --chain=/home/ubuntu/test_consensus/genesis.json \
+    --http \
+    --http.port=8545 \
+    --http.addr=0.0.0.0 \
+    --http.corsdomain=* \
+    --http.api=admin,net,eth,web3,debug,trace \
+    --ws \
+    --ws.addr=0.0.0.0 \
+    --ws.port=8546 \
+    --ws.api=net,eth \
+    --ws.origins=* \
+    --nat=extip:129.226.145.88 \
+    --authrpc.port=8551 \
+    --authrpc.jwtsecret=/secrets/jwt.hex \
+    --authrpc.addr=0.0.0.0 \
+    --metrics=0.0.0.0:9001 \
+    --discovery.port=30303 \
+    --port=30303 \
+    --bootnodes="enode://a7cade0e24ded39acabb31fbb7f327ead28126dfcf743f7bd530ec034717292584f9f8a3d96304a89dfb2da87fff2b80c842bc314c80170384c9d7f294227082@43.133.56.163:32000"
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5s
+User=ubuntu
+ExecStart=/home/ubuntu/.cargo/bin/lighthouse vc \
+    --debug-level=debug \
+    --testnet-dir=/home/ubuntu/test_consensus \
+    --validators-dir=/home/ubuntu/validator-keys/keys \
+    --secrets-dir=/home/ubuntu/validator-keys/secrets \
+    --init-slashing-protection \
+    --beacon-nodes=http://localhost:4000 \
+    --suggested-fee-recipient=0x8943545177806ED17B9F23F0a21ee5948eCaa776 \
+    --metrics \
+    --metrics-address=0.0.0.0 \
+    --metrics-allow-origin=* \
+    --metrics-port=5052 \
+    --graffiti=2-reth-lighthouse \
+    --http \
+    --http-port=5056 \
+    --http-address=0.0.0.0 \
+    --http-allow-origin=* \
+    --unencrypted-http-transport
+
+[Install]
+WantedBy=multi-user.target

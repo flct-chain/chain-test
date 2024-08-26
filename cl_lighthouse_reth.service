@@ -1,0 +1,38 @@
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5s
+User=ubuntu
+ExecStart=/home/ubuntu/.cargo/bin/lighthouse beacon_node \
+    --debug-level=debug \
+    --datadir=/home/ubuntu/data/lighthouse/beacon-data \
+    --disable-enr-auto-update \
+    --enr-address=129.226.145.88 \
+    --enr-udp-port=9000 \
+    --enr-tcp-port=9000 \
+    --listen-address=0.0.0.0 \
+    --port=9000 \
+    --http \
+    --http-address=0.0.0.0 \
+    --http-port=4000 \
+    --http-allow-sync-stalled \
+    --slots-per-restore-point=32 \
+    --disable-packet-filter \
+    --execution-endpoints=http://localhost:8551 \
+    --jwt-secrets=/secrets/jwt.hex \
+    --suggested-fee-recipient=0x8943545177806ED17B9F23F0a21ee5948eCaa776 \
+    --subscribe-all-subnets \
+    --metrics \
+    --metrics-address=0.0.0.0 \
+    --metrics-allow-origin=* \
+    --metrics-port=5054 \
+    --enable-private-discovery \
+    --testnet-dir=/home/ubuntu/test_consensus \
+    --reconstruct-historic-states \
+    --target-peers=70 \
+    --http-allow-origin=* \
+    --gui \
+    --boot-nodes="enr:-MS4QDCEAd5kxzXDopZ3-ZTXSVaF2gMN5waImDUbHF7--ogwMDRDXNbGg-ieGClgCVkiwPxl7_uNI4VJARDXRCLlcJABh2F0dG5ldHOIAAAAAAAAAACEZXRoMpBPtyXhYAAAOADh9QUAAAAAgmlkgnY0gmlwhCuFOKOEcXVpY4KA6YlzZWNwMjU2azGhA-3lNyUqLQLAAFjL6IgrPD0jatj35KMQTC4DdVGl37UoiHN5bmNuZXRzAIN0Y3CCgOiDdWRwgoDo"
+
+[Install]
+WantedBy=multi-user.target
